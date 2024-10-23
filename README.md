@@ -25,6 +25,10 @@
   - For storing data on volunteers, donations, and events.
   
 
+Here’s the updated section for contributing, including the correct repository URL:
+
+---
+
 ## How to Contribute
 
 We welcome contributions from the open-source community! Here's how you can get involved:
@@ -32,7 +36,7 @@ We welcome contributions from the open-source community! Here's how you can get 
 1. **Fork the repository**: Click on the 'Fork' button at the top right of this repository.
 2. **Clone your forked repo**:
    ```bash
-   git clone https://github.com/yourusername/slum-scholars.git
+   git clone https://github.com/yourusername/Slum-Scholars.git
    ```
 3. **Create a new branch** for your feature or bug fix:
    ```bash
@@ -54,22 +58,27 @@ We welcome contributions from the open-source community! Here's how you can get 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/slum-scholars.git
+   git clone https://github.com/ContriHUB/Slum-Scholars.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd slum-scholars
+   cd Slum-Scholars
    ```
 3. Install backend and frontend dependencies:
    ```bash
+   cd server 
    npm install
    cd client
    npm install
    ```
 4. Run the development server:
    ```bash
-   npm run dev
+   npm run start to run the client inside client folder
    ```
+
+---
+
+This will ensure that contributors have the correct repository URL and instructions to set up the project.
 
 
 Feel free to update this according to your project's structure and specific details from the brochure as you build the app.
