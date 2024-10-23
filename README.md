@@ -58,7 +58,7 @@ We welcome contributions from the open-source community! Here's how you can get 
    ```
 2. Navigate to the project directory:
    ```bash
-   cd swadesh-seva-sansthan
+   cd slum-scholars
    ```
 3. Install backend and frontend dependencies:
    ```bash
