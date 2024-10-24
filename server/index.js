@@ -1,8 +1,12 @@
 import express from 'express';
-import db from './db.js';
+import { connectDB, Contact } from './db.js'; // Import the connection and model
+
 const PORT = 3001;
 const app = express();
 app.use(express.json());
+
+// Connect to MongoDB
+connectDB();
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -11,7 +15,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/api/contact', (req, res) => {
+// POST route to save contact
+app.post('/api/contact', async (req, res) => {
   try {
     const { name, email, subject, message } = req.body;
 
@@ -20,19 +25,16 @@ app.post('/api/contact', (req, res) => {
       return res.status(400).send('All fields are required');
     }
 
-    // Insert into database
-    const stmt = db.prepare(
-      'INSERT INTO contacts (name, email, subject, message) VALUES (?, ?, ?, ?)'
-    );
-    const result = stmt.run(name, email, subject, message);
+    // Create and save new contact using MongoDB
+    const contact = new Contact({ name, email, subject, message });
+    await contact.save();
 
-    res.status(200).json({ success: true, id: result.lastInsertRowid });
+    res.status(200).json({ success: true, contact });
   } catch (error) {
     console.error('Error saving contact:', error);
     res.status(500).send('Failed to save contact information');
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
