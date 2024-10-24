@@ -60,20 +60,20 @@ We welcome contributions from the open-source community! Here's how you can get 
    ```bash
    git clone https://github.com/ContriHUB/Slum-Scholars.git
    ```
-2. Navigate to the project directory:
+2. Create .env inside server folder to setup MONGO DB ATLAS
+   ```bash
+   MONGO_URI='your-connection-string'
+   ```
+3. Navigate to the project directory:
    ```bash
    cd Slum-Scholars
    ```
-3. Install backend and frontend dependencies:
+4. Install backend and frontend dependencies:
    ```bash
    npm install
    cd server
    npm install
    ```
-4. Create .env inside server folder to setup MONGO DB ATLAS
-   ```bash
-   MONGO_URI='your-connection-string'
-   ```  
 5. Run the development server:
    In the root to start frontend
    ```bash
