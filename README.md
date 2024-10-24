@@ -66,16 +66,25 @@ We welcome contributions from the open-source community! Here's how you can get 
    ```
 3. Install backend and frontend dependencies:
    ```bash
-   cd server 
    npm install
-   cd client
+   cd server
    npm install
    ```
-4. Run the development server:
+4. Create .env inside server folder to setup MONGO DB ATLAS
    ```bash
-   npm run start to run the client inside client folder
+   MONGO_URI='your-connection-string'
+   ```  
+5. Run the development server:
+   In the root to start frontend
+   ```bash
+   npm run dev
    ```
-
+   To run backend
+   ```bash
+   cd server
+   npm start
+   ```
+   
 ---
 
 This will ensure that contributors have the correct repository URL and instructions to set up the project.
