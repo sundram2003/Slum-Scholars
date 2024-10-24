@@ -70,21 +70,12 @@ We welcome contributions from the open-source community! Here's how you can get 
    ```
 4. Install backend and frontend dependencies:
    ```bash
+   cd server 
    npm install
-   cd server
-   npm install
-   ```
-5. Run the development server:
-   In the root to start frontend
-   ```bash
+   cd client
    npm run dev
    ```
-   To run backend
-   ```bash
-   cd server
-   npm start
-   ```
-   
+
 ---
 
 This will ensure that contributors have the correct repository URL and instructions to set up the project.
