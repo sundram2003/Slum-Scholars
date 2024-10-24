@@ -1,11 +1,10 @@
 import express from 'express';
-import { connectDB, Contact } from './db.js'; // Import the connection and model
+import { connectDB, Contact } from './db.js'; 
 
 const PORT = 3001;
 const app = express();
 app.use(express.json());
 
-// Connect to MongoDB
 connectDB();
 
 app.use((req, res, next) => {
