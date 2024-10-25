@@ -63,6 +63,7 @@ We welcome contributions from the open-source community! Here's how you can get 
 2. Create .env inside server folder to setup MONGO DB ATLAS
    ```bash
    MONGO_URI='your-connection-string'
+   PORT=4000
    ```
 3. Navigate to the project directory:
    ```bash
