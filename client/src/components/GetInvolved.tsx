@@ -1,13 +1,26 @@
 import React from 'react';
 import { HandHeart, DollarSign, Users, Building } from 'lucide-react';
+import VolunteerForm from './VolunteerForm';
 
 const GetInvolved = () => {
+  const handleAction = (actionType: string) => {
+    switch (actionType) {
+      case "Donate Now":
+        break;
+      case "Share":
+        break;
+      case "Partner With Us":
+        break;
+    }
+  };
+
   const options = [
     {
       icon: <HandHeart className="h-8 w-8 text-indigo-600" />,
       title: "Volunteer",
       description: "Join our team of volunteers and help in education, healthcare, and women empowerment initiatives.",
-      action: "Apply Now"
+      action: "Apply Now",
+      component: <VolunteerForm />
     },
     {
       icon: <DollarSign className="h-8 w-8 text-indigo-600" />,
@@ -46,9 +59,16 @@ const GetInvolved = () => {
                 <div className="mb-4">{option.icon}</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{option.title}</h3>
                 <p className="text-gray-600 mb-6">{option.description}</p>
-                <button className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200">
-                  {option.action}
-                </button>
+                {option.component ? (
+                  option.component
+                ) : (
+                  <button 
+                    className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200"
+                    onClick={() => handleAction(option.action)}
+                  >
+                    {option.action}
+                  </button>
+                )}
               </div>
             </div>
           ))}
