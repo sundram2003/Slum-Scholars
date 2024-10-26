@@ -28,14 +28,13 @@ export const createVolunteer = async (req, res) => {
     }
 
     const encryptedAadhar = encrypt(aadharNumber);
-    const encryptedPhone = encrypt(phoneNumber);
 
     const volunteerData = {
       fullName,
       currentAddress,
       permanentAddress,
       aadharNumber: JSON.stringify(encryptedAadhar), 
-      phoneNumber: JSON.stringify(encryptedPhone), 
+      phoneNumber, 
       aadharLast4: aadharNumber.slice(-4), 
       activity,
       dateOfBirth,
@@ -73,12 +72,11 @@ export const getVolunteerAadhar = async (req, res) => {
     }
 
     const decryptedAadhar = decrypt(JSON.parse(volunteer.aadharNumber));
-    const decryptedPhone = decrypt(JSON.parse(volunteer.phoneNumber));
 
     res.json({
       success: true,
       aadharNumber: decryptedAadhar,
-      phoneNumber: decryptedPhone,
+      phoneNumber: volunteer.phoneNumber, 
       aadharLast4: volunteer.aadharLast4
     });
   } catch (error) {
@@ -90,6 +88,7 @@ export const getVolunteerAadhar = async (req, res) => {
     });
   }
 };
+
 export const getAllVolunteers = async (req, res) => {
   try {
     const volunteers = await Volunteer.find();
@@ -99,12 +98,9 @@ export const getAllVolunteers = async (req, res) => {
       try {
         if (volunteerObj.aadharNumber) {
           const decryptedAadhar = decrypt(JSON.parse(volunteerObj.aadharNumber));
-          volunteerObj.aadharNumber = `********${volunteerObj.aadharLast4}`; // Show only last 4 digits
+          volunteerObj.aadharNumber = `********${volunteerObj.aadharLast4}`; 
         }
-        if (volunteerObj.phoneNumber) {
-          const decryptedPhone = decrypt(JSON.parse(volunteerObj.phoneNumber));
-          volunteerObj.phoneNumber = decryptedPhone;
-        }
+        volunteerObj.phoneNumber = volunteer.phoneNumber; 
         return volunteerObj;
       } catch (error) {
         console.error(`Error decrypting data for volunteer ${volunteer._id}:`, error);
@@ -144,10 +140,7 @@ export const getVolunteerById = async (req, res) => {
         const decryptedAadhar = decrypt(JSON.parse(volunteerObj.aadharNumber));
         volunteerObj.aadharNumber = `********${volunteerObj.aadharLast4}`;
       }
-      if (volunteerObj.phoneNumber) {
-        const decryptedPhone = decrypt(JSON.parse(volunteerObj.phoneNumber));
-        volunteerObj.phoneNumber = decryptedPhone;
-      }
+      volunteerObj.phoneNumber = volunteer.phoneNumber; 
     } catch (error) {
       console.error('Error decrypting volunteer data:', error);
     }
@@ -177,14 +170,13 @@ export const getFullAadhar = async (req, res) => {
     }
 
     const decryptedAadhar = decrypt(JSON.parse(volunteer.aadharNumber));
-    const decryptedPhone = decrypt(JSON.parse(volunteer.phoneNumber));
 
     res.status(200).json({
       success: true,
       data: {
         fullName: volunteer.fullName,
         aadharNumber: decryptedAadhar,
-        phoneNumber: decryptedPhone 
+        phoneNumber: volunteer.phoneNumber 
       }
     });
   } catch (error) {
@@ -195,8 +187,6 @@ export const getFullAadhar = async (req, res) => {
     });
   }
 };
-
-
 
 export const updateVolunteer = async (req, res) => {
   try {
@@ -216,8 +206,7 @@ export const updateVolunteer = async (req, res) => {
     }
 
     if (phoneNumber) {
-      const encryptedPhone = encrypt(phoneNumber);
-      updateData.phoneNumber = JSON.stringify(encryptedPhone);
+      updateData.phoneNumber = phoneNumber; 
     }
 
     const volunteer = await Volunteer.findByIdAndUpdate(
