@@ -1,20 +1,36 @@
 import { Contact } from "../models/contact.model.js";
+
 export const contactUsController = async (req, res) => {
   try {
     const { name, email, subject, message } = req.body;
-    console.log("haeiahwith");
-    // Validate input
+
     if (!name || !email || !subject || !message) {
-      return res.status(400).send("All fields are required");
+      return res.status(400).json({
+        success: false,
+        message: "Please provide all required fields",
+      });
     }
 
-    // Create and save new contact using MongoDB
-    const contact = await Contact.create({ name, email, subject, message });
+    const contact = new Contact({
+      name,
+      email,
+      subject,
+      message,
+    });
+
     await contact.save();
 
-    res.status(200).json({ success: true, contact });
+    return res.status(201).json({
+      success: true,
+      message: "Message sent successfully",
+      data: contact,
+    });
   } catch (error) {
-    console.error("Error saving contact:", error);
-    res.status(500).send("Failed to save contact information");
+    console.error("Error in contactUsController:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
   }
 };

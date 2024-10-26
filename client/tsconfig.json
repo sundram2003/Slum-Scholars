@@ -9,6 +9,7 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"], 
       "*": ["node_modules/*"]
     }
   },
