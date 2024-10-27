@@ -6,11 +6,11 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: 'About Us', href: '#about' },
-    { name: 'Programs', href: '#programs' },
-    { name: 'Impact', href: '#impact' },
-    { name: 'Get Involved', href: '#get-involved' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About Us', href: '/#about' },
+    { name: 'Programs', href: '/#programs' },
+    { name: 'Impact', href: '/#impact' },
+    { name: 'Get Involved', href: '/#get-involved' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   return (
