@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, GraduationCap } from 'lucide-react';
-import { useState } from 'react';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
@@ -33,9 +34,12 @@ const Navbar = () => {
                   {item.name}
                 </a>
               ))}
-              <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200">
+              <Link
+                to="/donate"
+                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200"
+              >
                 Donate Now
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -65,9 +69,13 @@ const Navbar = () => {
                 {item.name}
               </a>
             ))}
-            <button className="w-full mt-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200">
+            <Link
+              to="/donate"
+              className="block w-full mt-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200 text-center"
+              onClick={() => setIsOpen(false)}
+            >
               Donate Now
-            </button>
+            </Link>
           </div>
         </div>
       )}
