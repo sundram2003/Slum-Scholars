@@ -20,7 +20,7 @@ app.use("/api/v1/home", homeRoutes);
 app.use('/api/volunteer', volunteerRoutes);
 app.use("/api/payment", paymentRoutes); 
 
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "d33df158b4102921ded9098c2899f845662442bdc8023427d3720ee97121f688";
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
