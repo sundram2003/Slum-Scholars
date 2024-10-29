@@ -8,6 +8,7 @@ import Impact from './components/Impact';
 import GetInvolved from './components/GetInvolved';
 import Contact from './components/Contact';
 import Admin from './components/ui/Admin';
+import DonatePage from './components/DonatePage';
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const Homepage = () => {
@@ -64,6 +65,10 @@ function App() {
             <Route 
               path="/admin" 
               element={<div className="pt-16 pb-8"><Admin /></div>} 
+            />
+            <Route 
+              path="/donate" 
+              element={<div className="pt-16 pb-8"><DonatePage /></div>}
             />
           </Routes>
         </main>
