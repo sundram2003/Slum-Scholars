@@ -92,20 +92,14 @@ export const getVolunteerAadhar = async (req, res) => {
 export const getAllVolunteers = async (req, res) => {
   try {
     const volunteers = await Volunteer.find();
-    
+
     const decryptedVolunteers = volunteers.map(volunteer => {
       const volunteerObj = volunteer.toObject();
-      try {
-        if (volunteerObj.aadharNumber) {
+      if (volunteerObj.aadharNumber) {
           const decryptedAadhar = decrypt(JSON.parse(volunteerObj.aadharNumber));
-          volunteerObj.aadharNumber = `********${volunteerObj.aadharLast4}`; 
-        }
-        volunteerObj.phoneNumber = volunteer.phoneNumber; 
-        return volunteerObj;
-      } catch (error) {
-        console.error(`Error decrypting data for volunteer ${volunteer._id}:`, error);
-        return volunteerObj;
+          volunteerObj.aadharNumber = `********${decryptedAadhar.aadharLast4}`; 
       }
+      return volunteerObj;
     });
 
     res.status(200).json({
