@@ -8,6 +8,8 @@ import Impact from './components/Impact';
 import GetInvolved from './components/GetInvolved';
 import Contact from './components/Contact';
 import DonatePage from './components/DonatePage';
+import Posts from './components/Posts'; // Import the Posts component
+import PostDetail from './components/PostDetail'; 
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const App: React.FC = () => {
@@ -34,6 +36,11 @@ const App: React.FC = () => {
               }
             />
             <Route path="/donate" element={<DonatePage />} />
+            <Route path="/posts" element={<Posts />} /> 
+            <Route path="/posts/:id" element={<PostDetail />} />
+
+
+
           </Routes>
         </main>
 

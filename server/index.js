@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import homeRoutes from "./routes/home.js";
 import volunteerRoutes from "./routes/volunteer.js"; 
 import paymentRoutes from "./routes/payment.js"; 
-
+import postRouter from "./routes/postRouter.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
@@ -20,7 +20,7 @@ app.use("/api/v1/home", homeRoutes);
 app.use('/api/volunteer', volunteerRoutes);
 app.use("/api/payment", paymentRoutes); 
 
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "";
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "d33df158b4102921ded9098c2899f845662442bdc8023427d3720ee97121f688";
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
