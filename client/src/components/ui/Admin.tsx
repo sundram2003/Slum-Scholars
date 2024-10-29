@@ -5,8 +5,8 @@ interface Volunteer {
   _id: string;
   fullName: string;
   email: string;
-  phone: string;
-  address: string;
+  phoneNumber: string;
+  currentAddress: string;
   aadharNumber: string;
   dateOfBirth: string;
   qualification: string;
@@ -35,17 +35,20 @@ const Admin = () => {
       console.log('Fetching volunteers...');
       const response = await getAllVolunteers();
       console.log('API Response:', response);
+      console.log('Data:', response.data);
       
       if (!response.data) {
         throw new Error('No data received from API');
       }
-
-      const sortedVolunteers = response.data.sort((a: Volunteer, b: Volunteer) => 
+      if(response.data.length === 0)  setVolunteers(response.data.data);
+      else {
+      const sortedVolunteers = response.data.data.sort((a: Volunteer, b: Volunteer) => 
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
-      
+
       console.log('Processed volunteers:', sortedVolunteers);
       setVolunteers(sortedVolunteers);
+    }
     } catch (error) {
       console.error('Error fetching volunteers:', error);
       setError(error instanceof Error ? error.message : 'Failed to fetch volunteers');
@@ -72,7 +75,7 @@ const Admin = () => {
   const filteredVolunteers = volunteers.filter(volunteer =>
     volunteer.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     volunteer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    volunteer.phone.includes(searchTerm)
+    volunteer.phoneNumber.includes(searchTerm)
   );
 
   const indexOfLastVolunteer = currentPage * volunteersPerPage;
@@ -176,10 +179,10 @@ const Admin = () => {
                     {volunteer.email}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {volunteer.phone}
+                    {volunteer.phoneNumber}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {volunteer.address}
+                    {volunteer.currentAddress}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {volunteer.aadharNumber}
