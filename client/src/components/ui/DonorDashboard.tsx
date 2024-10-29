@@ -16,7 +16,9 @@ const DonorDashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const pageSize = 10; // Number of items per page
 
   useEffect(() => {
     fetchDonors();
@@ -30,10 +32,13 @@ const DonorDashboard: React.FC = () => {
       if (!response.data) {
         throw new Error('No data received from API');
       }
-      const sortedDonors = response.data.sort((a: Donor, b: Donor) => 
+      const sortedDonors = response.data.sort((a: Donor, b: Donor) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
-      setDonors(sortedDonors);
+      setTotalPages(Math.ceil(sortedDonors.length / pageSize));
+      setDonors(
+        sortedDonors.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+      );
     } catch (error) {
       console.error('Error fetching donors:', error);
       setError(error instanceof Error ? error.message : 'Failed to fetch donors');
@@ -46,6 +51,12 @@ const DonorDashboard: React.FC = () => {
     donor.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     donor.email?.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md">
@@ -66,20 +77,11 @@ const DonorDashboard: React.FC = () => {
           </button>
         </div>
 
-        {loading && (
-          <div className="text-center text-gray-600">Loading donors...</div>
-        )}
-
-        {error && (
-          <div className="text-center text-red-600 mb-4">
-            Error: {error}
-          </div>
-        )}
+        {loading && <div className="text-center text-gray-600">Loading donors...</div>}
+        {error && <div className="text-center text-red-600 mb-4">Error: {error}</div>}
 
         {!loading && !error && filteredDonors.length === 0 && (
-          <div className="text-center text-gray-600">
-            No donors found
-          </div>
+          <div className="text-center text-gray-600">No donors found</div>
         )}
 
         {!loading && !error && filteredDonors.length > 0 && (
@@ -112,6 +114,25 @@ const DonorDashboard: React.FC = () => {
             </table>
           </div>
         )}
+
+        {/* Pagination Controls */}
+        <div className="flex justify-between items-center mt-4">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 rounded-md ${currentPage === 1 ? 'bg-gray-300' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage} of {totalPages}</span>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 rounded-md ${currentPage === totalPages ? 'bg-gray-300' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
