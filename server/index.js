@@ -18,8 +18,8 @@ app.use(morgan("combined"));
 app.use(cors());
 app.use("/api/v1/home", homeRoutes);
 app.use('/api/v1/volunteer', volunteerRoutes);
-app.use("/api/payment", paymentRoutes); 
-
+app.use("/api/payment", paymentRoutes);
+ 
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "";
 
 app.listen(PORT, () => {
