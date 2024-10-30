@@ -23,7 +23,7 @@ app.use("/api/payment", paymentRoutes);
 app.use('/api/v1/posts', postRoutes);
 
 
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "";
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
