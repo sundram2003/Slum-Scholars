@@ -2,20 +2,19 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 type PostProps = {
-  id: string;
+  _id: string;  // MongoDB uses `_id` instead of `id`
   title: string;
   date: string;
   description: string;
   image: string;
   tags: string[];
-  fullContent: string; 
 };
 
-const PostCard: React.FC<PostProps> = ({ id, title, date, description, image, tags, fullContent }) => {
+const PostCard: React.FC<PostProps> = ({ _id, title, date, description, image, tags }) => {
   const navigate = useNavigate();
 
   const handleReadMore = () => {
-    navigate(`/posts/${id}`, { state: { id, title, date, description, image, tags, fullContent } });
+    navigate(`/posts/${_id}`, { state: { _id, title, date, description, image, tags } });
   };
 
   return (
@@ -24,9 +23,9 @@ const PostCard: React.FC<PostProps> = ({ id, title, date, description, image, ta
       
       <div className="p-4 flex flex-col flex-grow justify-between">
         <div>
-          <span className="block text-sm text-gray-500 mb-1">{date}</span>
-          <h3 className="text-lg font-semibold">{title}</h3>
-          <p className="text-gray-700 text-sm mt-2">{description}</p>
+          <span className="block text-sm text-gray-500 mb-1">{new Date(date).toLocaleDateString()}</span>
+          <h3 className="text-lg font-semibold truncate">{title}</h3> {/* Added truncate class */}
+          <p className="text-gray-700 text-sm mt-2 line-clamp-3">{description}</p> {/* Added line-clamp class */}
         </div>
         
         <div>

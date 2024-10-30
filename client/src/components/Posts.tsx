@@ -1,44 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; 
+import axios from "axios";
 import PostCard from "./PostCard";
 
-const postsData = [
-  {
-    id: "1",
-    title: "Summer Camp Fun",
-    date: "2023-06-15",
-    description: "A week filled with activities, learning, and fun for all ages.",
-    image: "https://via.placeholder.com/300x180",
-    tags: ["Camp", "Education"],
-    fullContent: "Full content for Summer Camp Fun post..."
-  },
-  {
-    id: "2",
-    title: "Clean-up Drive",
-    date: "2023-03-12",
-    description: "Volunteers gathered to clean the neighborhood and promote eco-friendly practices.",
-    image: "https://via.placeholder.com/300x180",
-    tags: ["Community", "Environment"],
-    fullContent: "Full content for Clean-up Drive post..."
-  },
-  {
-    id: "3",
-    title: "Health Awareness Workshop",
-    date: "2023-08-20",
-    description: "An informative session on health and wellness, with free check-ups for attendees.",
-    image: "https://via.placeholder.com/300x180",
-    tags: ["Health", "Wellness"],
-    fullContent: "Home Page: A welcoming home page showcasing the vision and mission of Slum-Schloars efidsbvewuibfhvweibncewibvfw  eibvciw ebvoweabvc lorem dwhnfcowaenfon"
-  }
-];
-
 const Posts: React.FC = () => {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10; 
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/v1/posts/all");
+        if (response.data.success) {
+          setPosts(response.data.data);
+        } else {
+          console.error("Failed to fetch posts");
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  const totalPages = Math.ceil(posts.length / postsPerPage);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
-    <div className="flex flex-col items-center p-6">
-      <h2 className="text-4xl font-semibold mb-6 text-center">Posts</h2>
+    <div className="flex flex-col items-center p-6 mt-2">
+      <h2 className="  mb-6 text-center mt-12 text-3xl font-bold text-gray-900 sm:text-4xl">Posts</h2>
       <div className="flex flex-wrap justify-center gap-6">
-        { postsData.map((post) => (
-          <PostCard key={post.id} {...post} />  
+        {currentPosts.map((post) => (
+          <PostCard key={post._id} {...post} />
+        ))}
+      </div>
+
+      <div className="mt-6 flex space-x-2">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            className={`px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-black'} hover:bg-indigo-500`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
         ))}
       </div>
     </div>
