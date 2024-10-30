@@ -9,6 +9,8 @@ import GetInvolved from './components/GetInvolved';
 import Contact from './components/Contact';
 import Admin from './components/ui/Admin';
 import DonatePage from './components/DonatePage';
+import Posts from './components/Posts'; 
+import PostDetail from './components/PostDetail'; 
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const Homepage = () => {
@@ -70,6 +72,8 @@ function App() {
               path="/donate" 
               element={<div className="pt-16 pb-8"><DonatePage /></div>}
             />
+            <Route path="/posts" element={<Posts />} /> 
+            <Route path="/posts/:id" element={<PostDetail />} />
           </Routes>
         </main>
 
