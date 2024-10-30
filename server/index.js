@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import homeRoutes from "./routes/home.js";
 import volunteerRoutes from "./routes/volunteer.js"; 
 import paymentRoutes from "./routes/payment.js"; 
+import postRoutes from './routes/post.js';
 
 dotenv.config();
 
@@ -19,7 +20,9 @@ app.use(cors());
 app.use("/api/v1/home", homeRoutes);
 app.use('/api/v1/volunteer', volunteerRoutes);
 app.use("/api/payment", paymentRoutes);
- 
+app.use('/api/v1/posts', postRoutes);
+
+
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "";
 
 app.listen(PORT, () => {

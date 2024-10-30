@@ -10,7 +10,15 @@ const isValidObjectId = (id) => {
 export const homeEndPoints = {
   CONTACTUS_API: `${BASE_URL}/home/contactUs`,
 };
-
+export const getAllPayments = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL.replace('/api/v1', '')}/api/payment`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching payments:', error);
+    throw error;
+  }
+};
 export const getAllVolunteers = async () => {
   try {
     console.log('Making request to:', `${BASE_URL}/volunteer/all`);
@@ -34,6 +42,35 @@ export const updateVolunteerStatus = async (volunteerId, status) => {
     return response;
   } catch (error) {
     console.error('Error in updateVolunteerStatus:', error);
+    throw error;
+  }
+};
+export const createPost = async (postData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/posts/create`, postData);
+    return response;
+  } catch (error) {
+    console.error('Error creating post:', error);
+    throw error;
+  }
+};
+
+export const getAllPosts = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/posts/all`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    throw error;
+  }
+};
+
+export const deletePost = async (postId) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/posts/${postId}`);
+    return response;
+  } catch (error) {
+    console.error('Error deleting post:', error);
     throw error;
   }
 };
