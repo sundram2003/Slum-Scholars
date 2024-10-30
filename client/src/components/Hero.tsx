@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative h-[90vh] flex items-center justify-center">
       <div className="absolute inset-0">
@@ -20,7 +22,9 @@ const Hero = () => {
           Join us in our mission to provide education, healthcare, and essential resources to children in need.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-indigo-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-indigo-700 transition-colors duration-200">
+          <button className="bg-indigo-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-indigo-700 transition-colors duration-200"
+          onClick={() => navigate('/donate')} 
+          >
             Donate Now
           </button>
           <button className="bg-white text-indigo-600 px-8 py-3 rounded-md text-lg font-semibold hover:bg-gray-100 transition-colors duration-200">

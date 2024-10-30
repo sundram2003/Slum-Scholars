@@ -1,11 +1,13 @@
 import React from 'react';
 import { HandHeart, DollarSign, Users, Building } from 'lucide-react';
 import VolunteerForm from './VolunteerForm';
-
+import { useNavigate } from 'react-router-dom';
 const GetInvolved = () => {
+  const navigate = useNavigate();
   const handleAction = (actionType: string) => {
     switch (actionType) {
       case "Donate Now":
+        navigate('/donate');
         break;
       case "Share":
         break;
@@ -27,6 +29,7 @@ const GetInvolved = () => {
       title: "Donate",
       description: "Your donation directly supports education, healthcare, and sustainability efforts for underprivileged communities.",
       action: "Donate Now"
+      
     },
     {
       icon: <Users className="h-8 w-8 text-indigo-600" />,
