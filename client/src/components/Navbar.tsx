@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, GraduationCap } from 'lucide-react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: 'About Us', href: '/#about' },
-    { name: 'Programs', href: '/#programs' },
-    { name: 'Impact', href: '/#impact' },
-    { name: 'Posts', href: '/posts' },
-    { name: 'Get Involved', href: '/#get-involved' },
-    { name: 'Contact', href: '/#contact' },
+    { name: "About Us", href: "/#about" },
+    { name: "Programs", href: "/#programs" },
+    { name: "Impact", href: "/#impact" },
+    { name: "Posts", href: "/posts" },
+    { name: "Get Involved", href: "/#get-involved" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -19,10 +19,16 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
-            <GraduationCap className="h-8 w-8 text-indigo-600" />
-            <span className="ml-2 text-xl font-bold text-gray-900">Slum Scholar</span>
+            <img
+              src="../../public/logo.png"
+              alt="Logo"
+              style={{ height: "50px" }}
+            />
+            <span className="ml-2 text-xl font-bold text-gray-900">
+              Swadesh Seva Sansthan
+            </span>
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-8">
@@ -50,7 +56,11 @@ const Navbar: React.FC = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-indigo-600 focus:outline-none"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
