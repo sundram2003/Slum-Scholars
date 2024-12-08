@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import QrCodeImage from "../../src/qrcode.png"; // Correct path based on your folder structure
 
 const DonatePage: React.FC = () => {
   const [name, setName] = useState("");
@@ -14,7 +15,7 @@ const DonatePage: React.FC = () => {
     }
 
     const options = {
-      key: "RAZORPAY_KEY", // Replace with your Razorpay key
+      key: "ENTER YOUR API KEY", // Replace with your Razorpay key
       amount: parseInt(amount) * 100,
       currency: "INR",
       name: "Slum Scholar",
@@ -29,20 +30,19 @@ const DonatePage: React.FC = () => {
           // Save payment details
           try {
             await fetch("http://localhost:4000/api/payment/success", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  name,
-                  email,
-                  contact,
-                  amount,
-                  message,
-                  paymentId: response.razorpay_payment_id,
-                }),
-              });
-              
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name,
+                email,
+                contact,
+                amount,
+                message,
+                paymentId: response.razorpay_payment_id,
+              }),
+            });
           } catch (error) {
             console.error("Error recording payment:", error);
           }
@@ -126,17 +126,18 @@ const DonatePage: React.FC = () => {
           className="w-full h-48 rounded-md object-cover mb-6"
         />
         <div className="flex flex-col items-center">
-          <img
-            src="https://randomqr.com/assets/images/randomqr-256.png"
+          {/* <img
+            src="./Qrcode.png"
             alt="UPI QR Code"
             className="w-32 h-32 mb-4"
-          />
+          /> */}
+          <img src={QrCodeImage} alt="UPI QR Code" className="w-32 h-33 mb-4" />
           <div className="text-center">
             <p className="font-semibold">UPI ID</p>
-            <p className="mb-2">abcdquygfuhfoiwjvowir@upi</p>
+            <p className="mb-2">8127009790@okbizaxis</p>
             <p className="font-semibold">Bank Details</p>
-            <p>Account No: XXXXXXXXXSBI</p>
-            <p>IFSC:BARB0VJMNRE</p>
+            <p>SBI Bank AC/no.: 39986692230</p>
+            <p>IFSC-CODE:SBIN0013766</p>
           </div>
         </div>
       </div>

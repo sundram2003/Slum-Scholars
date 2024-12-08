@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { homeEndPoints } from "../services/apis";
+import { Twitter, Facebook } from "lucide-react";
+
 interface FormData {
   name: string;
   email: string;
@@ -185,18 +187,56 @@ const Contact = () => {
               <div className="flex items-center">
                 <Mail className="h-6 w-6 text-indigo-600 mr-3" />
                 <span className="text-gray-600">
-                  info@swadeshsevasansthan.org
+                  sansthanswadeshseva@gmail.com
                 </span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-6 w-6 text-indigo-600 mr-3" />
-                <span className="text-gray-600">+91-XXXXXXXXXX</span>
+                <span className="text-gray-600">+91-8127009790</span>
+              </div>
+              <div className="flex items-start space-x-3">
+                <MapPin className="h-6 w-6 text-indigo-600 mt-1" />
+                <div className="text-gray-600">
+                  <div className="mb-4">
+                    <h5 className="font-semibold text-indigo-600">
+                      Head Office:
+                    </h5>
+                    <p>
+                      136/4C/6A, Bhagirath Marg, Chota Baghada, Prayagraj-211002
+                    </p>
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-indigo-600">
+                      Branch Office:
+                    </h5>
+                    <p>
+                      76/3A, Suturkhana, (Near Appu Medical Store), Salori,
+                      Prayagraj-211004
+                    </p>
+                  </div>
+                </div>
               </div>
               <div className="flex items-center">
-                <MapPin className="h-6 w-6 text-indigo-600 mr-3" />
-                <span className="text-gray-600">
-                  123 Seva Street, City, India
-                </span>
+                <Twitter className="h-6 w-6 text-indigo-600 mr-3" />
+                <a
+                  href="https://x.com/SSS_swadesh_NGO"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-indigo-600 transition"
+                >
+                  @SSS swadesh NGO
+                </a>
+              </div>
+              <div className="flex items-center">
+                <Facebook className="h-6 w-6 text-indigo-600 mr-3" />
+                <a
+                  href="https://www.facebook.com/p/Swadesh-Seva-Sansthan-Ngo-100060728772710/?locale=en_GB"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-indigo-600 transition"
+                >
+                  Swadesh Seva Sansthan
+                </a>
               </div>
             </div>
           </div>
