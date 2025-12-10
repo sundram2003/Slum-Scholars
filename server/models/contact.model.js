@@ -6,6 +6,7 @@ const contactSchema = new mongoose.Schema({
   subject: { type: String, required: true },
   message: { type: String, required: true },
   created_at: { type: Date, default: Date.now },
+  created_by : {type : String}
 });
 
 const Contact = mongoose.model("Contact", contactSchema);
